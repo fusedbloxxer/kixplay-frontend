@@ -1,0 +1,18 @@
+<form id="user-login-form">
+  <mat-form-field appearance="standard">
+    <input type="text" matInput placeholder="Username">
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <input matInput [type]="showPass ? 'text' : 'password'" placeholder="Password">
+    <button mat-icon-button matSuffix type="button" (click)="showPass = !showPass">
+      <mat-icon>
+        {{showPass ? 'visibility' : 'visibility_off'}}
+      </mat-icon>
+    </button>
+  </mat-form-field>
+
+  <button mat-raised-button type="submit" id="login-button" color="accent">
+    Login
+  </button>
+</form>

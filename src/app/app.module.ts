@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { UserLoginComponent } from './components/toolbar/user-login/user-login.component';
 import { MatInputModule } from '@angular/material/input';
@@ -16,6 +16,8 @@ import { NavigationComponent } from './components/toolbar/navigation/navigation.
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserMenuComponent } from './components/toolbar/user-menu/user-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ErrorInterceptor } from './middleware/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,13 +39,20 @@ import { MatMenuModule } from '@angular/material/menu';
     AppRoutingModule,
 
     // Material UI
+    MatSnackBarModule,
     MatMenuModule,
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

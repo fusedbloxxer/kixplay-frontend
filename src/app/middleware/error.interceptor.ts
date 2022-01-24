@@ -3,16 +3,32 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, retry, throwError } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorResponse } from '../models/error-response.model';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+  constructor(private snackBar: MatSnackBar) {}
 
-  constructor() {}
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    return next.handle(request).pipe(
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        const errorResponse: ErrorResponse = httpErrorResponse.error;
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+        this.snackBar.open(
+          errorResponse.errors?.[0] || 'An error occurred',
+          'Okay'
+        );
+
+        return throwError(() => httpErrorResponse);
+      })
+    );
   }
 }

@@ -1,10 +1,10 @@
-<form id="user-login-form">
+<form id="user-login-form" [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
   <mat-form-field appearance="standard">
-    <input type="text" matInput placeholder="Username">
+    <input type="email" matInput placeholder="Email" formControlName="email">
   </mat-form-field>
 
   <mat-form-field appearance="standard">
-    <input matInput [type]="showPass ? 'text' : 'password'" placeholder="Password">
+    <input matInput [type]="showPass ? 'text' : 'password'" placeholder="Password" formControlName="pass">
     <button mat-icon-button matSuffix type="button" (click)="showPass = !showPass">
       <mat-icon>
         {{showPass ? 'visibility' : 'visibility_off'}}
@@ -12,7 +12,11 @@
     </button>
   </mat-form-field>
 
-  <button mat-raised-button type="submit" id="login-button" color="accent">
+  <button mat-raised-button type="submit" id="login-button" color="accent"
+    [disabled]="userLoginForm.invalid && userLoginForm.dirty">
     Login
   </button>
+  <a mat-raised-button routerLink="/users/register">
+    Register
+  </a>
 </form>

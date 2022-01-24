@@ -1,0 +1,15 @@
+<button type="button" mat-button [matMenuTriggerFor]="user_menu">
+  <mat-icon>account_circle</mat-icon>
+  <span>{{authService.currentUserValue?.userName}}</span>
+</button>
+
+<mat-menu #user_menu="matMenu">
+  <button type="button" mat-menu-item (click)="onLogout()">
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </button>
+  <button type="button" mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </button>
+</mat-menu>

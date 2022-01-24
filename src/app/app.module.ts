@@ -13,6 +13,9 @@ import { UserLoginComponent } from './components/toolbar/user-login/user-login.c
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { NavigationComponent } from './components/toolbar/navigation/navigation.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserMenuComponent } from './components/toolbar/user-menu/user-menu.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -21,17 +24,20 @@ import { NavigationComponent } from './components/toolbar/navigation/navigation.
     ToolbarComponent,
     UserLoginComponent,
     NavigationComponent,
+    UserMenuComponent,
   ],
   imports: [
     // Common Modules
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
 
     // Custom Modules
     AppRoutingModule,
 
     // Material UI
+    MatMenuModule,
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,

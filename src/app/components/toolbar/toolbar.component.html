@@ -2,6 +2,11 @@
   <app-navigation>
   </app-navigation>
 
-  <app-user-login>
-  </app-user-login>
+  <ng-container *ngIf="authService.isLoggedIn()">
+    <app-user-menu></app-user-menu>
+  </ng-container>
+
+  <ng-container *ngIf="!authService.isLoggedIn()">
+    <app-user-login></app-user-login>
+  </ng-container>
 </mat-toolbar>

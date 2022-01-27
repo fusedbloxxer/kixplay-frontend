@@ -7,7 +7,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { catchError, Observable, retry, throwError } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ErrorResponse } from '../models/error-response.model';
 
 @Injectable()
@@ -24,7 +24,10 @@ export class ErrorInterceptor implements HttpInterceptor {
 
         this.snackBar.open(
           errorResponse.errors?.[0] || 'An error occurred',
-          'Okay'
+          'OKAY',
+          {
+            duration: 3000,
+          }
         );
 
         return throwError(() => httpErrorResponse);

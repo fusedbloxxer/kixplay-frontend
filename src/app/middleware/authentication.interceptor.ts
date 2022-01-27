@@ -9,6 +9,7 @@ import {
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
+import { UserClaims } from '../models/user-claims.model';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
@@ -32,7 +33,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         ];
 
         // Match the current route
-        if (!tokenRoutes.find(route => req.url.match(route))) {
+        if (!tokenRoutes.find((route) => req.url.match(route))) {
           return event;
         }
 
@@ -45,11 +46,17 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         }
 
         // Get the custom response
-        debugger;
         const userResponse = response as HttpResponse<User>;
+        const payload: string =
+          userResponse.body?.token.split('.')?.[1] ?? '{}';
 
-        debugger;
-        return event;
+        // Decode the token and add the claims
+        const claims: UserClaims = JSON.parse(atob(payload));
+
+        // Clone the body and add the claims
+        return event.clone({
+          body: { ...userResponse.body, claims },
+        });
       })
     );
   }

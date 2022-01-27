@@ -47,7 +47,7 @@ export class AuthenticationService {
    * and return true if it is still valid.
    */
   public isLoggedIn(): boolean {
-    return !!(this.currentUserValue);
+    return !!this.currentUserValue;
   }
 
   /**
@@ -60,7 +60,8 @@ export class AuthenticationService {
         this.currentUserSubject.next(user);
         this.localStorageService.setItem(
           AuthenticationService.CURRENT_USER,
-          user
+          user,
+          user.claims.exp * 1_000
         );
       })
     );

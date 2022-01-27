@@ -1,6 +1,6 @@
 import { Role } from './role.model';
 
-export interface Token {
+export interface UserClaims {
   email: string;
   unique_name: string;
   nameid: string;

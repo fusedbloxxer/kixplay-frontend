@@ -1,3 +1,5 @@
+import { UserClaims } from "./user-claims.model";
+
 export interface User {
   id: string;
   email: string;
@@ -6,4 +8,5 @@ export interface User {
   lastName: string;
   dateOfBirth: Date;
   token: string;
+  claims: UserClaims;
 }

@@ -18,6 +18,8 @@ import { UserMenuComponent } from './components/toolbar/user-menu/user-menu.comp
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ErrorInterceptor } from './middleware/error.interceptor';
+import { LoggingInterceptor } from './middleware/logging.interceptor';
+import { AuthenticationInterceptor } from './middleware/authentication.interceptor';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,17 @@ import { ErrorInterceptor } from './middleware/error.interceptor';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
+      useClass: LoggingInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
       multi: true,
     },
   ],

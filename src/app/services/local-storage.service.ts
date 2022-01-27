@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
   // Default expiration time is 3 minutes
-  static DEFAULT_EXPIRATION: number = 180_000;
+  public static defaultExpiration = () => new Date().getTime() + 180_000;
 
   constructor() {}
 
@@ -16,12 +16,12 @@ export class LocalStorageService {
   public setItem<T>(
     key: string,
     value: T | null | undefined,
-    expiration: number = LocalStorageService.DEFAULT_EXPIRATION
+    expiration: number = LocalStorageService.defaultExpiration()
   ): void {
     localStorage.setItem(
       key,
       JSON.stringify({
-        expiration: new Date().getTime() + expiration,
+        expiration,
         value,
       })
     );

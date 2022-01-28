@@ -11,9 +11,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { UserInfoComponent } from './components/user-info/user-info.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 @NgModule({
-  declarations: [UserCreateComponent, UserInfoComponent],
+  declarations: [UserCreateComponent, UserInfoComponent, UserUpdateComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,

@@ -70,13 +70,13 @@ export class UserInfoComponent implements OnInit {
         },
       ],
       firstName: [
-        '',
+        null,
         {
           validators: [nameValidator()],
         },
       ],
       lastName: [
-        '',
+        null,
         {
           validators: [nameValidator()],
         },

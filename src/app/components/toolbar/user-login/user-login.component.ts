@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { first } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -16,12 +17,28 @@ export class UserLoginComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 
-  initForm(): FormGroup {
+  public get userEmail(): string {
+    return this.userLoginForm.get('email')?.value;
+  }
+
+  public get userPass(): string {
+    return this.userLoginForm.get('pass')?.value;
+  }
+
+  public get user(): { email: string; pass: string } {
+    return {
+      email: this.userEmail,
+      pass: this.userPass,
+    };
+  }
+
+  public initForm(): FormGroup {
     return this.fb.group({
       email: [
         '',
@@ -33,7 +50,11 @@ export class UserLoginComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  public clearForm(): void {
+    this.userLoginForm.reset();
+  }
+
+  public onSubmit(): void {
     if (this.userLoginForm.invalid) {
       return;
     }
@@ -47,6 +68,7 @@ export class UserLoginComponent implements OnInit {
       .subscribe({
         next: (user: User) => {
           console.log(user);
+          this.router.navigate(['/home']);
         },
         error: (err: any) => {
           console.error(err);

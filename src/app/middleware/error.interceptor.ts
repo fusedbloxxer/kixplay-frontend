@@ -6,9 +6,8 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, Observable, retry, throwError } from 'rxjs';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { ErrorResponse } from '../models/error-response.model';
+import { catchError, Observable, throwError } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -20,18 +19,21 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((httpErrorResponse: HttpErrorResponse) => {
-        const errorResponse: ErrorResponse = httpErrorResponse.error;
+        const errorResponse = httpErrorResponse.error;
 
-        this.snackBar.open(
-          errorResponse.errors?.[0] || 'An error occurred',
-          'OKAY',
-          {
-            duration: 3000,
-          }
-        );
+        this.snackBar.open(this.extractError(errorResponse), 'OKAY', {
+          duration: 3000,
+        });
 
         return throwError(() => httpErrorResponse);
       })
     );
+  }
+
+  private extractError(errorResponse: any): string {
+    if (errorResponse.errors instanceof Array) {
+      return errorResponse.errors?.[0] || 'An error occurred.';
+    }
+    return errorResponse?.title || 'An error occurred';
   }
 }

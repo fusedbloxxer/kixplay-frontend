@@ -41,7 +41,8 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         const response = event as HttpResponse<any>;
 
         // Ignore failed requests
-        if (response.status !== 200) {
+        const successCodes = [200, 201];
+        if (!successCodes.includes(response.status)) {
           return event;
         }
 

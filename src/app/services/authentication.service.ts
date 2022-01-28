@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
+import { UserInfo } from '../modules/users/models/user-info.model';
 import { UsersApiService } from './api/users-api.service';
 import { LocalStorageService } from './local-storage.service';
 
@@ -56,6 +57,23 @@ export class AuthenticationService {
    */
   login(email: string, pass: string): Observable<User> {
     return this.usersService.loginUser(email, pass).pipe(
+      tap((user: User) => {
+        this.currentUserSubject.next(user);
+        this.localStorageService.setItem(
+          AuthenticationService.CURRENT_USER,
+          user,
+          user.claims.exp * 1_000
+        );
+      })
+    );
+  }
+
+  /**
+   * Register a new user.
+   * Cache the info and token if successful.
+   */
+  register(userInfo: UserInfo): Observable<User> {
+    return this.usersService.createUser(userInfo).pipe(
       tap((user: User) => {
         this.currentUserSubject.next(user);
         this.localStorageService.setItem(

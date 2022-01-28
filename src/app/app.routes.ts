@@ -14,6 +14,13 @@ export const appRoutes: Routes = [
       ),
   },
   {
+    path: 'users',
+    loadChildren: () =>
+      import('./modules/users/users.module').then(
+        (module) => module.UsersModule
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/home',

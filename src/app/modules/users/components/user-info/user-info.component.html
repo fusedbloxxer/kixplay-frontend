@@ -1,0 +1,83 @@
+<div id="user-create-container">
+  <mat-card>
+    <mat-card-title>{{title}}</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="userInfoForm" id="user-create-form" (ngSubmit)="onUserInfoSubmit()" autocomplete="off">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <mat-icon matSuffix>email</mat-icon>
+          <input matInput type="email" formControlName="email">
+          <mat-error *ngIf="userInfoForm.get('email')?.hasError('email')">
+            Please enter a valid email address.
+          </mat-error>
+          <mat-error *ngIf="userInfoForm.get('email')?.hasError('required')">
+            Email is <strong>required.</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <input matInput type="text" formControlName="username">
+          <mat-error *ngIf="userInfoForm.get('username')?.hasError('username')">
+            {{userInfoForm.get('username')?.errors?.['message']}}
+          </mat-error>
+          <mat-error *ngIf="userInfoForm.get('username')?.hasError('required')">
+            Username is <strong>required.</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+          <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+            <mat-icon>
+              {{hidePassword ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+          </button>
+          <mat-error *ngIf="userInfoForm.get('password')?.hasError('password')">
+            {{userInfoForm.get('password')?.getError('message')}}
+          </mat-error>
+          <mat-error *ngIf="userInfoForm.get('password')?.hasError('required')">
+            The password is <strong>required.</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <mat-icon matSuffix>perm_identity</mat-icon>
+          <input matInput type="text" formControlName="firstName">
+          <mat-error *ngIf="userInfoForm.get('firstName')?.hasError('name')">
+            {{userInfoForm.get('firstName')?.errors?.['message']}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <mat-icon matSuffix>perm_identity</mat-icon>
+          <input matInput type="text" formControlName="lastName">
+          <mat-error *ngIf="userInfoForm.get('lastName')?.hasError('name')">
+            {{userInfoForm.get('lastName')?.errors?.['message']}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date of birth</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+          <mat-error *ngIf="userInfoForm.get('dateOfBirth')?.hasError('dob')">
+            {{userInfoForm.get('dateOfBirth')?.errors?.['message']}}
+          </mat-error>
+          <mat-error *ngIf="userInfoForm.get('dateOfBirth')?.hasError('required')">
+            The date of birth is <strong>required.</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" color="primary" [disabled]="userInfoForm.invalid">
+          Submit
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

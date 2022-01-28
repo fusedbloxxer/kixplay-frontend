@@ -16,7 +16,7 @@
     [disabled]="userLoginForm.invalid && userLoginForm.dirty">
     Login
   </button>
-  <a mat-raised-button routerLink="/users/register">
+  <a mat-raised-button routerLink="/users/create" [state]="user" (click)="clearForm()">
     Register
   </a>
 </form>

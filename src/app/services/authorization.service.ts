@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { Role } from '../models/role.model';
-import { User } from '../models/user.model';
+import { RoleModel } from '../modules/users/models/role.model';
+import { UserModel } from '../modules/users/models/user.model';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { AuthenticationService } from './authentication.service';
 export class AuthorizationService {
   constructor(private authService: AuthenticationService) {}
 
-  public hasRole(role: Role): Observable<boolean> {
+  public hasRole(role: RoleModel): Observable<boolean> {
     // Check for authentication
     if (!this.authService.isLoggedIn()) {
       return of(false);
@@ -20,7 +20,7 @@ export class AuthorizationService {
     return of(this.getUserRoles().includes(role));
   }
 
-  public hasAnyRole(roles: Role[]): Observable<boolean> {
+  public hasAnyRole(roles: RoleModel[]): Observable<boolean> {
     // Check for authentication
     if (!this.authService.isLoggedIn()) {
       return of(false);
@@ -30,7 +30,7 @@ export class AuthorizationService {
     return of(this.getUserRoles().some(role => roles.includes(role)))
   }
 
-  public hasAllRoles(roles: Role[]): Observable<boolean> {
+  public hasAllRoles(roles: RoleModel[]): Observable<boolean> {
     // Check for authentication
     if (!this.authService.isLoggedIn()) {
       return of(false);
@@ -40,7 +40,7 @@ export class AuthorizationService {
     return of(roles.every(role => this.getUserRoles().includes(role)))
   }
 
-  private getUserRoles(): Role[] {
+  private getUserRoles(): RoleModel[] {
     // Check for existance
     if (!this.authService.currentUserValue) {
       return [];

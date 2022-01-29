@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { UserInfoValidation } from '../../models/user-info-validation.model';
-import { UserInfo } from '../../models/user-info.model';
+import { UserInfoValidationModel } from '../../models/user-info-validation.model';
+import { UserInfoModel } from '../../models/user-info.model';
 
 @Component({
   selector: 'app-user-create',
@@ -21,7 +21,7 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onUserCreate(userInfo: UserInfo): void {
+  onUserCreate(userInfo: UserInfoModel): void {
     this.authService.register(userInfo).subscribe({
       next: () => {
         this.router.navigate(['/home']);
@@ -36,11 +36,11 @@ export class UserCreateComponent implements OnInit {
     if (response.error.errors instanceof Array) {
       return;
     }
-    const validation: UserInfoValidation = response.error.errors;
+    const validation: UserInfoValidationModel = response.error.errors;
     this.handleErrorMessages(validation);
   }
 
-  private handleErrorMessages(validation: UserInfoValidation): void {
+  private handleErrorMessages(validation: UserInfoValidationModel): void {
     const userInfoGroup: FormGroup | null = this.createUserForm.get(
       'userInfoGroup'
     ) as FormGroup;

@@ -1,10 +1,10 @@
-import { Role } from './role.model';
+import { RoleModel } from './role.model';
 
-export interface UserClaims {
+export interface UserClaimsModel {
   email: string;
   unique_name: string;
   nameid: string;
-  roles: Role[];
+  roles: RoleModel[];
   nbf: number;
   exp: number;
   iat: number;

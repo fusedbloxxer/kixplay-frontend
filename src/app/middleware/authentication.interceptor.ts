@@ -8,8 +8,8 @@ import {
 } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/user.model';
-import { UserClaims } from '../models/user-claims.model';
+import { UserModel } from '../modules/users/models/user.model';
+import { UserClaimsModel } from '../modules/users/models/user-claims.model';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
@@ -49,12 +49,12 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         }
 
         // Get the custom response
-        const userResponse = response as HttpResponse<User>;
+        const userResponse = response as HttpResponse<UserModel>;
         const payload: string =
           userResponse.body?.token.split('.')?.[1] ?? '{}';
 
         // Decode the token and add the claims
-        const claims: UserClaims = JSON.parse(atob(payload));
+        const claims: UserClaimsModel = JSON.parse(atob(payload));
 
         // Clone the body and add the claims
         return event.clone({

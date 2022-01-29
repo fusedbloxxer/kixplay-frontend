@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
-import { User } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/modules/users/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { passwordValidator } from 'src/app/validators/password.validator';
 
@@ -66,7 +66,7 @@ export class UserLoginComponent implements OnInit {
       )
       .pipe(first())
       .subscribe({
-        next: (user: User) => {
+        next: (user: UserModel) => {
           console.log(user);
           this.router.navigate(['/home']);
         },

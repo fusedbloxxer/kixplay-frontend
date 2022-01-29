@@ -1,4 +1,4 @@
-export enum Role {
+export enum RoleModel {
   Contributor = 'Contributor',
   Moderator = 'Moderator',
   Member = 'Member',

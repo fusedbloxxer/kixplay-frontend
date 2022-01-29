@@ -6,13 +6,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/modules/users/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { dobValidator } from 'src/app/validators/dob.validator';
 import { nameValidator } from 'src/app/validators/name.validator';
 import { passwordValidator } from 'src/app/validators/password.validator';
 import { usernameValidator } from 'src/app/validators/username.validator';
-import { UserInfo } from '../../models/user-info.model';
+import { UserInfoModel } from '../../models/user-info.model';
 
 @Component({
   selector: 'app-user-info',
@@ -42,7 +42,7 @@ export class UserInfoComponent implements OnInit {
 
   @Input('prefill')
   public prefill: boolean = false;
-  public userInfoPrefill: UserInfo = {
+  public userInfoPrefill: UserInfoModel = {
     email: undefined,
     userName: undefined,
     password: undefined,
@@ -52,10 +52,10 @@ export class UserInfoComponent implements OnInit {
   };
 
   @Output('onUserDelete')
-  public userDelete: EventEmitter<User | null | undefined> = new EventEmitter();
+  public userDelete: EventEmitter<UserModel | null | undefined> = new EventEmitter();
 
   @Output('onUserInfoSubmit')
-  public userInfoSubmit: EventEmitter<UserInfo> = new EventEmitter();
+  public userInfoSubmit: EventEmitter<UserInfoModel> = new EventEmitter();
 
   constructor(
     private router: Router,

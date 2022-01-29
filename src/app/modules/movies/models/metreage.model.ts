@@ -1,4 +1,4 @@
-export enum Metreage {
+export enum MetreageModel {
   Long = 'Long',
   Short = 'Short',
 }

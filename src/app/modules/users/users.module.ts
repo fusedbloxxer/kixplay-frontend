@@ -14,6 +14,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MatDividerModule } from '@angular/material/divider';
     UserInfoComponent,
     UserUpdateComponent,
     UserSettingsComponent,
+    UserDashboardComponent,
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-import { User } from 'src/app/models/user.model';
-import { UserInfo } from 'src/app/modules/users/models/user-info.model';
+import { UserModel } from 'src/app/modules/users/models/user.model';
+import { UserInfoModel } from 'src/app/modules/users/models/user-info.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,22 +11,22 @@ import { environment } from 'src/environments/environment';
 export class UsersApiService {
   constructor(private http: HttpClient) {}
 
-  public loginUser(email: string, pass: string): Observable<User> {
-    return this.http.post<User>(`${environment.baseApiServer}/users/login`, {
+  public loginUser(email: string, pass: string): Observable<UserModel> {
+    return this.http.post<UserModel>(`${environment.baseApiServer}/users/login`, {
       password: pass,
       email,
     });
   }
 
-  public createUser(userInfo: UserInfo): Observable<User> {
-    return this.http.post<User>(
+  public createUser(userInfo: UserInfoModel): Observable<UserModel> {
+    return this.http.post<UserModel>(
       `${environment.baseApiServer}/users/register`,
       userInfo
     );
   }
 
-  public updateUser(userId: string, userInfo: UserInfo): Observable<User> {
-    return this.http.put<User>(
+  public updateUser(userId: string, userInfo: UserInfoModel): Observable<UserModel> {
+    return this.http.put<UserModel>(
       `${environment.baseApiServer}/users/${userId}/update`,
       userInfo
     );

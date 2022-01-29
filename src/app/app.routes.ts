@@ -14,7 +14,7 @@ export const appRoutes: Routes = [
       ),
   },
   {
-    path: 'users',
+    path: 'user',
     loadChildren: () =>
       import('./modules/users/users.module').then(
         (module) => module.UsersModule

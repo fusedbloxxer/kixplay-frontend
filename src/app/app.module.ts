@@ -21,6 +21,7 @@ import { ErrorInterceptor } from './middleware/error.interceptor';
 import { LoggingInterceptor } from './middleware/logging.interceptor';
 import { AuthenticationInterceptor } from './middleware/authentication.interceptor';
 import { JwtInterceptor } from './middleware/jwt.interceptor';
+import { SeparatorPipe } from './pipes/separator.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { JwtInterceptor } from './middleware/jwt.interceptor';
     UserLoginComponent,
     NavigationComponent,
     UserMenuComponent,
+    SeparatorPipe,
   ],
   imports: [
     // Common Modules

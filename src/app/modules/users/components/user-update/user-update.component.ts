@@ -2,9 +2,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/modules/users/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { UserInfo } from '../../models/user-info.model';
+import { UserInfoModel } from '../../models/user-info.model';
 
 @Component({
   selector: 'app-user-update',
@@ -22,7 +22,7 @@ export class UserUpdateComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public onUserUpdate(userInfo: UserInfo): void {
+  public onUserUpdate(userInfo: UserInfoModel): void {
     this.authService.update(userInfo).subscribe({
       next: () => {
         this.snackBar.open('Information updated successfully', 'ACCEPT', {
@@ -32,7 +32,7 @@ export class UserUpdateComponent implements OnInit {
     });
   }
 
-  public onUserDelete(user: User | null | undefined): void {
+  public onUserDelete(user: UserModel | null | undefined): void {
     if (!user) {
       return;
     }

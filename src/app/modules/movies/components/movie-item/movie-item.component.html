@@ -1,1 +1,11 @@
-<p>movie-item works!</p>
+<mat-card>
+  <mat-card-title>
+    <a [routerLink]="[movie.id, movie.title, 'details']">
+      {{movie.title}}
+    </a>
+  </mat-card-title>
+  <!-- <img mat-card-image src="{{movie.thumbnailUrl}}" > -->
+  <mat-card-content>
+    abc
+  </mat-card-content>
+</mat-card>

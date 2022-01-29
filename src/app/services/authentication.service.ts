@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap, throwError } from 'rxjs';
-import { User } from '../models/user.model';
-import { UserInfo } from '../modules/users/models/user-info.model';
+import { UserModel } from '../modules/users/models/user.model';
+import { UserInfoModel } from '../modules/users/models/user-info.model';
 import { UsersApiService } from './api/users-api.service';
 import { LocalStorageService } from './local-storage.service';
 
@@ -14,19 +14,19 @@ export class AuthenticationService {
   /**
    * Use the subject to emit new states for the user status.
    */
-  private currentUserSubject: BehaviorSubject<User | null | undefined>;
+  private currentUserSubject: BehaviorSubject<UserModel | null | undefined>;
 
   /**
    * Observe the current status of the users.
    */
-  public currentUser$: Observable<User | undefined | null>;
+  public currentUser$: Observable<UserModel | undefined | null>;
 
   constructor(
     private localStorageService: LocalStorageService,
     private usersService: UsersApiService
   ) {
     this.currentUserSubject = new BehaviorSubject(
-      localStorageService.getItem<User>(AuthenticationService.CURRENT_USER)
+      localStorageService.getItem<UserModel>(AuthenticationService.CURRENT_USER)
     );
     this.currentUser$ = this.currentUserSubject.asObservable();
   }
@@ -35,8 +35,8 @@ export class AuthenticationService {
    * Get the current user from the local storage.
    * Will return null or undefined if the cache expired.
    */
-  public get currentUserValue(): User | null | undefined {
-    const curentUser = this.localStorageService.getItem<User>(
+  public get currentUserValue(): UserModel | null | undefined {
+    const curentUser = this.localStorageService.getItem<UserModel>(
       AuthenticationService.CURRENT_USER
     );
     this.currentUserSubject.next(curentUser);
@@ -55,9 +55,9 @@ export class AuthenticationService {
    * Login the user by calling the UsersAPI login.
    * Cache the user info and the token.
    */
-  public login(email: string, pass: string): Observable<User> {
+  public login(email: string, pass: string): Observable<UserModel> {
     return this.usersService.loginUser(email, pass).pipe(
-      tap((user: User) => {
+      tap((user: UserModel) => {
         this.updateLocalStorage(user);
       })
     );
@@ -67,9 +67,9 @@ export class AuthenticationService {
    * Register a new user.
    * Cache the info and token if successful.
    */
-  public register(userInfo: UserInfo): Observable<User> {
+  public register(userInfo: UserInfoModel): Observable<UserModel> {
     return this.usersService.createUser(userInfo).pipe(
-      tap((user: User) => {
+      tap((user: UserModel) => {
         this.updateLocalStorage(user);
       })
     );
@@ -79,14 +79,14 @@ export class AuthenticationService {
    * Update the user settings.
    * Update the local token with the new one.
    */
-  public update(userInfo: UserInfo): Observable<User> {
+  public update(userInfo: UserInfoModel): Observable<UserModel> {
     if (!this.currentUserValue) {
       return throwError(() => 'Invalid user claims.');
     }
     return this.usersService
       .updateUser(this.currentUserValue.claims.nameid, userInfo)
       .pipe(
-        tap((user: User) => {
+        tap((user: UserModel) => {
           this.updateLocalStorage(user);
         })
       );
@@ -111,7 +111,7 @@ export class AuthenticationService {
   /**
    * Update the curent session info using local storage.
    */
-  private updateLocalStorage(user: User): void {
+  private updateLocalStorage(user: UserModel): void {
     this.currentUserSubject.next(user);
     this.localStorageService.setItem(
       AuthenticationService.CURRENT_USER,

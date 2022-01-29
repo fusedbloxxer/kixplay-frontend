@@ -17,6 +17,9 @@ export const usersRoutes = [
     canActivate: [AuthGuard],
   },
   {
+
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full',

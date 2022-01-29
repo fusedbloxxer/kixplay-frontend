@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { Movie } from 'src/app/models/movie.model';
-import { MoviesApiService } from 'src/app/services/api/movies-api.service';
+import { ActivatedRoute } from '@angular/router';
+import { MovieDetailsModel } from '../../models/movie-details.model';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,17 +8,11 @@ import { MoviesApiService } from 'src/app/services/api/movies-api.service';
   styleUrls: ['./movie-list.component.scss'],
 })
 export class MovieListComponent implements OnInit {
-  movies$!: Observable<string[]>;
+  public movies: MovieDetailsModel[];
 
-  constructor(private moviesApiService: MoviesApiService) {}
-
-  ngOnInit(): void {
-    this.movies$ = this.moviesApiService
-      .getAllMovies()
-      .pipe(
-        map((movies: Movie[]) =>
-          movies.map((movie) => JSON.stringify(movie, null, '\t'))
-        )
-      );
+  constructor(private route: ActivatedRoute) {
+    this.movies = route.snapshot.data['movies'];
   }
+
+  ngOnInit(): void {}
 }

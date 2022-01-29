@@ -1,4 +1,4 @@
-export enum AirStatus {
+export enum AirStatusModel {
   Unreleased = 'Unreleased',
   Abandoned = 'Abandoned',
   Finished = 'Finished',

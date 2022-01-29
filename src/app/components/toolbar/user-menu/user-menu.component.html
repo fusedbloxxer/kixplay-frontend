@@ -4,10 +4,10 @@
 </button>
 
 <mat-menu #user_menu="matMenu">
-  <button type="button" mat-menu-item>
+  <a routerLink="/users/settings" mat-menu-item>
     <mat-icon>settings</mat-icon>
     <span>Settings</span>
-  </button>
+  </a>
   <button type="button" mat-menu-item (click)="onLogout()">
     <mat-icon>logout</mat-icon>
     <span>Logout</span>

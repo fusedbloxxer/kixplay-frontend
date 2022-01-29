@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserInfo } from 'src/app/modules/users/models/user-info.model';
 import { environment } from 'src/environments/environment';
@@ -22,6 +22,19 @@ export class UsersApiService {
     return this.http.post<User>(
       `${environment.baseApiServer}/users/register`,
       userInfo
+    );
+  }
+
+  public updateUser(userId: string, userInfo: UserInfo): Observable<User> {
+    return this.http.put<User>(
+      `${environment.baseApiServer}/users/${userId}/update`,
+      userInfo
+    );
+  }
+
+  public deleteUser(userId: string): Observable<void> {
+    return this.http.delete<void>(
+      `${environment.baseApiServer}/users/${userId}/remove`
     );
   }
 }

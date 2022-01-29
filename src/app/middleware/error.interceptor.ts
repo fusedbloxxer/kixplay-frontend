@@ -31,9 +31,14 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 
   private extractError(errorResponse: any): string {
+    if (!errorResponse) {
+      return 'An error occurred';
+    }
+
     if (errorResponse.errors instanceof Array) {
       return errorResponse.errors?.[0] || 'An error occurred.';
     }
+
     return errorResponse?.title || 'An error occurred';
   }
 }

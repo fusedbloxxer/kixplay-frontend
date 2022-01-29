@@ -12,9 +12,16 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
-  declarations: [UserCreateComponent, UserInfoComponent, UserUpdateComponent],
+  declarations: [
+    UserCreateComponent,
+    UserInfoComponent,
+    UserUpdateComponent,
+    UserSettingsComponent,
+  ],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -27,6 +34,7 @@ import { UserUpdateComponent } from './components/user-update/user-update.compon
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
+    MatDividerModule,
   ],
 })
 export class UsersModule {}

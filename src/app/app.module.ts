@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ErrorInterceptor } from './middleware/error.interceptor';
 import { LoggingInterceptor } from './middleware/logging.interceptor';
 import { AuthenticationInterceptor } from './middleware/authentication.interceptor';
+import { JwtInterceptor } from './middleware/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,11 @@ import { AuthenticationInterceptor } from './middleware/authentication.intercept
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
       multi: true,
     },
   ],

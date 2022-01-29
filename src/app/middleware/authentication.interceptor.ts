@@ -22,7 +22,8 @@ export class AuthenticationInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       map((event: HttpEvent<unknown>) => {
         // Ignore all events besides responses
-        if (!(event instanceof HttpResponse) || req.method !== 'POST') {
+        const methods = ['POST', 'PUT'];
+        if (!(event instanceof HttpResponse) || !methods.includes(req.method)) {
           return event;
         }
 
@@ -30,6 +31,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         const tokenRoutes = [
           `${environment.baseApiServer}/users/login`,
           `${environment.baseApiServer}/users/register`,
+          `${environment.baseApiServer}/users/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/update`,
         ];
 
         // Match the current route

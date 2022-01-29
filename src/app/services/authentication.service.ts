@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { UserInfo } from '../modules/users/models/user-info.model';
 import { UsersApiService } from './api/users-api.service';
@@ -55,15 +55,10 @@ export class AuthenticationService {
    * Login the user by calling the UsersAPI login.
    * Cache the user info and the token.
    */
-  login(email: string, pass: string): Observable<User> {
+  public login(email: string, pass: string): Observable<User> {
     return this.usersService.loginUser(email, pass).pipe(
       tap((user: User) => {
-        this.currentUserSubject.next(user);
-        this.localStorageService.setItem(
-          AuthenticationService.CURRENT_USER,
-          user,
-          user.claims.exp * 1_000
-        );
+        this.updateLocalStorage(user);
       })
     );
   }
@@ -72,24 +67,56 @@ export class AuthenticationService {
    * Register a new user.
    * Cache the info and token if successful.
    */
-  register(userInfo: UserInfo): Observable<User> {
+  public register(userInfo: UserInfo): Observable<User> {
     return this.usersService.createUser(userInfo).pipe(
       tap((user: User) => {
-        this.currentUserSubject.next(user);
-        this.localStorageService.setItem(
-          AuthenticationService.CURRENT_USER,
-          user,
-          user.claims.exp * 1_000
-        );
+        this.updateLocalStorage(user);
       })
     );
   }
 
   /**
+   * Update the user settings.
+   * Update the local token with the new one.
+   */
+  public update(userInfo: UserInfo): Observable<User> {
+    if (!this.currentUserValue) {
+      return throwError(() => 'Invalid user claims.');
+    }
+    return this.usersService
+      .updateUser(this.currentUserValue.claims.nameid, userInfo)
+      .pipe(
+        tap((user: User) => {
+          this.updateLocalStorage(user);
+        })
+      );
+  }
+
+  /**
+   * Delete the current user.
+   * Remove the token and logout.
+   */
+  public delete(userId: string): Observable<void> {
+    return this.usersService.deleteUser(userId).pipe(tap(() => this.logout()));
+  }
+
+  /**
    * Remove the user from the local storage.
    */
-  logout() {
+  public logout() {
     this.localStorageService.removeItem(AuthenticationService.CURRENT_USER);
     this.currentUserSubject.next(null);
+  }
+
+  /**
+   * Update the curent session info using local storage.
+   */
+  private updateLocalStorage(user: User): void {
+    this.currentUserSubject.next(user);
+    this.localStorageService.setItem(
+      AuthenticationService.CURRENT_USER,
+      user,
+      user.claims.exp * 1_000
+    );
   }
 }

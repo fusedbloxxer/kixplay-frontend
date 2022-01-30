@@ -11,18 +11,53 @@ mat-card {
 
   mat-card-content {
     text-align: justify;
-    padding: 16px;
 
-    #synopsis > p {
-      font-weight: bold;
-      font-size: 1.05em;
+    .content-section {
+      >p {
+        font-weight: bold;
+        font-size: 1.05em;
+      }
+    }
+
+    >.synopsis {
+      padding: 16px;
+    }
+
+    >.genres {
+      padding-top: 16px;
+      padding-bottom: 16px;
+
+      mat-chip-list {
+        ::ng-deep>div {
+          justify-content: center;
+        }
+      }
     }
   }
 
-  img {
-    object-fit: cover;
-    height: 324px;
-    width: 100%;
-    margin: 0px;
+  .thumbnail {
+    position: relative;
+
+    img {
+      position: relative;
+      object-fit: cover;
+      height: 324px;
+      width: 100%;
+      margin: 0px;
+    }
+
+    ::ng-deep mat-chip {
+      position: absolute;
+
+      &.release {
+        right: 10px;
+        bottom: 10px;
+      }
+
+      &.air {
+        left: 10px;
+        bottom: 10px;
+      }
+    }
   }
 }

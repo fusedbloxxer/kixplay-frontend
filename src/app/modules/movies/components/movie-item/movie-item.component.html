@@ -1,6 +1,14 @@
 <mat-card appScale [factor]="1.05">
   <app-overlay text="Watch" [url]="[movie.id, movie.title | separator:'-', 'details']">
-    <img mat-card-image [src]="movie.thumbnailUrl">
+    <div class="thumbnail">
+      <img mat-card-image [src]="movie.thumbnailUrl">
+      <mat-chip class="release" color="accent" selected>
+        {{movie.releaseDate | date:'YYYY'}}
+      </mat-chip>
+      <mat-chip class="air" color="primary" selected>
+        {{movie.airingStatus | uppercase}}
+      </mat-chip>
+    </div>
   </app-overlay>
 
   <mat-card-title>
@@ -10,17 +18,34 @@
   <mat-divider inset></mat-divider>
 
   <mat-card-content>
-    <div id="synopsis">
+    <div class="synopsis content-section">
       <p>Synopsis</p>
       {{movie.synopsis | summary:128}}
     </div>
+
+    <mat-divider inset></mat-divider>
+
+    <div class="genres">
+      <mat-chip-list *ngIf="movie.genres">
+        <mat-chip *ngFor="let genre of movie.genres | shuffle:3">
+          {{genre}}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+
+    <!-- <mat-divider inset></mat-divider>
+
+    <div class="info">
+      <mat-chip-list class="mat-chip-list-stacked">
+      </mat-chip-list>
+    </div> -->
   </mat-card-content>
 
-  <!-- Titlu -->
   <!-- AiringStatus -->
   <!-- ThumbnailUrl -->
-  <!-- Genres -->
+  <!-- Titlu -->
   <!-- Synopsis -->
+  <!-- Genres -->
   <!-- Duration -->
   <!-- Release Date Year -->
 </mat-card>

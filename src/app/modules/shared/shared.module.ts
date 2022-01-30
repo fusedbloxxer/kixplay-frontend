@@ -16,9 +16,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { SummaryPipe } from './pipes/summary.pipe';
 import { ScaleDirective } from './directives/scale.directive';
+import { MatChipsModule } from '@angular/material/chips';
+import { ShufflePipe } from './pipes/shuffle.pipe';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
-  declarations: [SeparatorPipe, SummaryPipe, ScaleDirective],
+  declarations: [SeparatorPipe, SummaryPipe, ScaleDirective, ShufflePipe],
   imports: [
     // Common
     CommonModule,
@@ -28,6 +31,7 @@ import { ScaleDirective } from './directives/scale.directive';
     ReactiveFormsModule,
 
     // Angular Material UI
+    MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
@@ -37,6 +41,7 @@ import { ScaleDirective } from './directives/scale.directive';
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
+    MatChipsModule,
     MatCardModule,
     MatMenuModule,
     MatIconModule,
@@ -49,12 +54,14 @@ import { ScaleDirective } from './directives/scale.directive';
     ScaleDirective,
     SeparatorPipe,
     SummaryPipe,
+    ShufflePipe,
 
     // Forms
     FormsModule,
     ReactiveFormsModule,
 
     // Angular Material UI
+    MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
@@ -64,6 +71,7 @@ import { ScaleDirective } from './directives/scale.directive';
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
+    MatChipsModule,
     MatCardModule,
     MatMenuModule,
     MatIconModule,

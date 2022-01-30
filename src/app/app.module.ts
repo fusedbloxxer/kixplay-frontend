@@ -15,6 +15,7 @@ import { AuthenticationInterceptor } from './middleware/authentication.intercept
 import { JwtInterceptor } from './middleware/jwt.interceptor';
 import { SharedModule } from './modules/shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material/bottom-sheet';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,10 @@ import { CommonModule } from '@angular/common';
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true,
+    },
+    {
+      provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS,
+      useValue: { hasBackdrop: false },
     },
   ],
   bootstrap: [AppComponent],

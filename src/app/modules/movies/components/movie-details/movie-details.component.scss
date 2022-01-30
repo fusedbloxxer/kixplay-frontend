@@ -1,3 +1,7 @@
+div.movie-details {
+  overflow-x: hidden;
+}
+
 div.banner {
   display: flex;
   align-items: center;
@@ -22,9 +26,77 @@ div.banner {
   }
 }
 
-div.thumbnail {
-  img {
-    object-fit: contain;
-    width: 240px;
+div.presentation {
+  background-color: #303030;
+
+  div.showcase {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    padding: 24px 0px 24px 0px;
+
+
+    >div.thumbnail {
+      img {
+        object-fit: contain;
+        height: 360px;
+      }
+    }
+
+    >app-carousel {
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+
+  >mat-chip-list.genres>::ng-deep div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    mat-chip {
+      margin-bottom: 24px;
+      margin-left: 24px;
+    }
+  }
+
+  >div.short-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 16px;
+
+    >div.info-entry {
+      font-weight: bold;
+      font-size: 1.5em;
+      color: white;
+    }
+  }
+}
+
+div.content {
+  >div.description {
+    margin-bottom: 16px;
+  }
+
+  >div.watch-movie {
+    >h2 {
+      color: black;
+      text-align: center;
+    }
+
+    >ul.providers {
+      list-style-type: none;
+      padding: 0px 40px;
+
+      >li {
+        img {
+          text-align: center;
+        }
+      }
+    }
   }
 }

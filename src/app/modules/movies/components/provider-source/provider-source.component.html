@@ -1,0 +1,7 @@
+<mat-nav-list (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+  <a [href]="sourceUrl" *ngFor="let sourceUrl of sources; let i = index" (click)="onClick($event, sourceUrl)">
+    <span mat-line>
+      Source {{i+1}}
+    </span>
+  </a>
+</mat-nav-list>

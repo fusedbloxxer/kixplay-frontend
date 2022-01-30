@@ -3,5 +3,5 @@ import { MetreageModel } from './metreage.model';
 
 export interface MovieModel extends MediaModel {
   wonAwards: number;
-  metrageType: MetreageModel;
+  metreageType: MetreageModel;
 }

@@ -1,27 +1,99 @@
-<div class="banner">
-  <img [src]="movie.bannerUrl">
-  <h1 class="title">{{movie.title | titlecase}}</h1>
-</div>
-
-<app-carousel [width]="560" [height]="315" [hasControls]="true">
-  <app-carousel-item *ngFor="let videoUrl of movie.previewVideoUrls">
-    <app-load #loader>
-      <iframe (load)="loader.isLoading=false" [src]="videoUrl | safe" title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </app-load>
-  </app-carousel-item>
-  <app-carousel-item *ngFor="let imageUrl of movie.previewImageUrls">
-    <app-load #loader>
-      <img (load)="loader.isLoading=false" [src]="imageUrl">
-    </app-load>
-  </app-carousel-item>
-</app-carousel>
-
-<div class="presentation">
-  <div class="thumbnail">
-    <img [src]="movie.thumbnailUrl">
+<div class="movie-details">
+  <div class="banner">
+    <img [src]="movie.bannerUrl">
+    <h1 class="title">{{movie.title | titlecase}}</h1>
   </div>
 
+  <div class="presentation">
+    <div class="showcase">
+      <div class="thumbnail">
+        <img [src]="movie.thumbnailUrl">
+      </div>
+
+      <app-carousel [width]="720" [height]="360" [hasControls]="true">
+        <app-carousel-item *ngFor="let videoUrl of movie.previewVideoUrls">
+          <app-load #loader>
+            <iframe (load)="loader.isLoading=false" [src]="videoUrl | safe" title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </app-load>
+        </app-carousel-item>
+        <app-carousel-item *ngFor="let imageUrl of movie.previewImageUrls">
+          <app-load #loader>
+            <img (load)="loader.isLoading=false" [src]="imageUrl">
+          </app-load>
+        </app-carousel-item>
+      </app-carousel>
+    </div>
+
+    <mat-chip-list class="genres">
+      <mat-chip *ngFor="let genre of movie.genres" color="primary" selected>
+        {{genre}}
+      </mat-chip>
+    </mat-chip-list>
+
+    <div class="short-info">
+      <div class="info-entry">
+        Release date:
+        <mat-chip class="release-date" color="accent" selected>
+          {{movie.releaseDate | date}}
+        </mat-chip>
+      </div>
+
+      <div class="info-entry">
+        Duration:
+        <mat-chip class="duration" color="accent" selected>
+          {{movie.duration}}
+        </mat-chip>
+      </div>
+
+      <div class="info-entry">
+        Airing Status:
+        <mat-chip class="airing-status" color="accent" selected>
+          {{movie.airingStatus | titlecase}}
+        </mat-chip>
+      </div>
+
+      <div class="info-entry" *ngIf="movie.metreageType">
+        Metreage:
+        <mat-chip class="metreage" color="accent" selected>
+          {{movie.metreageType}}
+        </mat-chip>
+      </div>
+
+      <div class="info-entry">
+        Won Awards:
+        <mat-chip class="won-awards" color="accent" selected>
+          {{movie.wonAwards}}
+        </mat-chip>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="description">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Synopsis
+          </mat-panel-title>
+          <mat-panel-description>
+            {{movie.synopsis}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        {{movie.description}}
+      </mat-expansion-panel>
+    </div>
+
+    <div class="watch-movie">
+      <h2>You can watch it here:</h2>
+      <ul class="providers">
+        <li *ngFor="let provider of movie.providers">
+          <app-movie-provider class="watch-sources" [provider]="provider">
+          </app-movie-provider>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

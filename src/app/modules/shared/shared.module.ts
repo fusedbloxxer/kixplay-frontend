@@ -26,6 +26,9 @@ import { DynamicTemplateDirective } from './directives/dynamic-template.directiv
 import { DynamicViewDirective } from './directives/dynamic-view.directive';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoadComponent } from './components/load/load.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -50,9 +53,11 @@ import { LoadComponent } from './components/load/load.component';
 
     // Angular Material UI
     MatProgressSpinnerModule,
+    MatBottomSheetModule,
     MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
     MatSnackBarModule,
@@ -62,6 +67,7 @@ import { LoadComponent } from './components/load/load.component';
     MatInputModule,
     MatChipsModule,
     MatCardModule,
+    MatListModule,
     MatMenuModule,
     MatIconModule,
   ],
@@ -86,10 +92,12 @@ import { LoadComponent } from './components/load/load.component';
 
     // Angular Material UI
     MatProgressSpinnerModule,
+    MatBottomSheetModule,
     MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
+    MatExpansionModule,
     MatGridListModule,
     MatSnackBarModule,
     MatDividerModule,
@@ -97,6 +105,7 @@ import { LoadComponent } from './components/load/load.component';
     MatButtonModule,
     MatInputModule,
     MatChipsModule,
+    MatListModule,
     MatCardModule,
     MatMenuModule,
     MatIconModule,

@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-title>
+    {{provider.title | titlecase}}
+  </mat-card-title>
+
+  <mat-card-content>
+    <p>{{provider.description}}</p>
+  </mat-card-content>
+
+  <img mat-card-image [src]="provider.thumbnailUrl">
+
+  <mat-card-actions>
+    <button mat-button (click)="showSources()">Watch</button>
+  </mat-card-actions>
+</mat-card>

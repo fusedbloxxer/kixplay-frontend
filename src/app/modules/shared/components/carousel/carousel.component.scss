@@ -1,0 +1,44 @@
+div.carousel-container {
+  position: relative;
+
+  div.carousel-view {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+
+    ::ng-deep * {
+      object-fit: cover;
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  div.carousel-controls {
+    position: absolute;
+    top: 0px;
+
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+
+    height: 100%;
+    width: 100%;
+
+    ::ng-deep button.carousel-control {
+      position: relative;
+      color: white;
+      z-index: 2;
+
+      &.carousel-prev {
+        margin-left: 16px;
+      }
+
+      &.carousel-next {
+        margin-right: 16px;
+      }
+    }
+  }
+}

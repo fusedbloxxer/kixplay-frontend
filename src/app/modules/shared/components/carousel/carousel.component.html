@@ -1,0 +1,22 @@
+<div class="carousel-container" [style.width.px]="width" [style.height.px]="height">
+  <div class="carousel-controls">
+    <button class="carousel-control carousel-prev" *ngIf="hasControls" mat-icon-button type="button" (click)="onPrev()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+
+    <button class="carousel-control carousel-next" *ngIf="hasControls" mat-icon-button type="button" (click)="onNext()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <div class="carousel-view">
+    <!-- Catch the content and avoid displaying it -->
+    <ng-template>
+      <ng-content></ng-content>
+    </ng-template>
+
+    <!-- View container where the content is rendered -->
+    <ng-container appDynamicView>
+    </ng-container>
+  </div>
+</div>

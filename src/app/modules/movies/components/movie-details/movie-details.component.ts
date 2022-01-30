@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoadComponent } from 'src/app/modules/shared/components/load/load.component';
 import { MovieDetailsModel } from '../../models/movie-details.model';
 
 @Component({

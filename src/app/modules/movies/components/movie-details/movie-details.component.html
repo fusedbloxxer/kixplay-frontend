@@ -1,3 +1,27 @@
-<p>movie-details works!</p>
+<div class="banner">
+  <img [src]="movie.bannerUrl">
+  <h1 class="title">{{movie.title | titlecase}}</h1>
+</div>
 
-{{movie}}
+<app-carousel [width]="560" [height]="315" [hasControls]="true">
+  <app-carousel-item *ngFor="let videoUrl of movie.previewVideoUrls">
+    <app-load #loader>
+      <iframe (load)="loader.isLoading=false" [src]="videoUrl | safe" title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </app-load>
+  </app-carousel-item>
+  <app-carousel-item *ngFor="let imageUrl of movie.previewImageUrls">
+    <app-load #loader>
+      <img (load)="loader.isLoading=false" [src]="imageUrl">
+    </app-load>
+  </app-carousel-item>
+</app-carousel>
+
+<div class="presentation">
+  <div class="thumbnail">
+    <img [src]="movie.thumbnailUrl">
+  </div>
+
+</div>

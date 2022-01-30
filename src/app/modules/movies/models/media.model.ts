@@ -1,4 +1,4 @@
-import { AirStatusModel } from "./airing-status.model";
+import { AirStatusModel } from './airing-status.model';
 
 export interface MediaModel {
   id: string;
@@ -9,5 +9,7 @@ export interface MediaModel {
   thumbnailUrl: string;
   duration?: string;
   releaseDate?: Date;
+  previewImageUrls: string[];
+  previewVideoUrls: string[];
   airingStatus: AirStatusModel;
 }

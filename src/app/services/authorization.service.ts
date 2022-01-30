@@ -47,6 +47,6 @@ export class AuthorizationService {
     }
 
     // Get the roles
-    return this.authService.currentUserValue.claims.roles;
+    return this.authService.currentUserValue.claims.role;
   }
 }

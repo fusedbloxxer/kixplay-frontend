@@ -4,7 +4,7 @@ export interface UserClaimsModel {
   email: string;
   unique_name: string;
   nameid: string;
-  roles: RoleModel[];
+  role: RoleModel[];
   nbf: number;
   exp: number;
   iat: number;

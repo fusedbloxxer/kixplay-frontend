@@ -86,7 +86,7 @@
       </mat-expansion-panel>
     </div>
 
-    <div class="watch-movie">
+    <div class="watch-movie" *ngIf="canSeeSources$ | async">
       <h2>You can watch it here:</h2>
       <ul class="providers">
         <li *ngFor="let provider of movie.providers">

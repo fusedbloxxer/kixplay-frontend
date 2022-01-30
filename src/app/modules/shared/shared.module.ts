@@ -14,9 +14,11 @@ import { MatCardModule } from '@angular/material/card';
 import { NgModule } from '@angular/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { SummaryPipe } from './pipes/summary.pipe';
+import { ScaleDirective } from './directives/scale.directive';
 
 @NgModule({
-  declarations: [SeparatorPipe],
+  declarations: [SeparatorPipe, SummaryPipe, ScaleDirective],
   imports: [
     // Common
     CommonModule,
@@ -44,7 +46,9 @@ import { MatMenuModule } from '@angular/material/menu';
     CommonModule,
 
     // Custom Components
+    ScaleDirective,
     SeparatorPipe,
+    SummaryPipe,
 
     // Forms
     FormsModule,

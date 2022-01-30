@@ -1,11 +1,26 @@
-<mat-card>
+<mat-card appScale [factor]="1.05">
+  <app-overlay text="Watch" [url]="[movie.id, movie.title | separator:'-', 'details']">
+    <img mat-card-image [src]="movie.thumbnailUrl">
+  </app-overlay>
+
   <mat-card-title>
-    <a [routerLink]="[movie.id, movie.title, 'details']">
-      {{movie.title}}
-    </a>
+    {{movie.title | titlecase}}
   </mat-card-title>
-  <!-- <img mat-card-image src="{{movie.thumbnailUrl}}" > -->
+
+  <mat-divider inset></mat-divider>
+
   <mat-card-content>
-    abc
+    <div id="synopsis">
+      <p>Synopsis</p>
+      {{movie.synopsis | summary:128}}
+    </div>
   </mat-card-content>
+
+  <!-- Titlu -->
+  <!-- AiringStatus -->
+  <!-- ThumbnailUrl -->
+  <!-- Genres -->
+  <!-- Synopsis -->
+  <!-- Duration -->
+  <!-- Release Date Year -->
 </mat-card>

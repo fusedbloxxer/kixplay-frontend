@@ -1,0 +1,28 @@
+mat-card {
+  width: 256px;
+  height: 100%;
+  padding: 0px;
+  box-sizing: border-box;
+
+  mat-card-title {
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  mat-card-content {
+    text-align: justify;
+    padding: 16px;
+
+    #synopsis > p {
+      font-weight: bold;
+      font-size: 1.05em;
+    }
+  }
+
+  img {
+    object-fit: cover;
+    height: 324px;
+    width: 100%;
+    margin: 0px;
+  }
+}

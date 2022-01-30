@@ -1,0 +1,11 @@
+<div class="overlay-container">
+  <div class="overlay-external">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="overlay-internal">
+    <a [routerLink]="url" mat-raised-button type="button" color="primary">
+      {{text | titlecase}}
+    </a>
+  </div>
+</div>

@@ -1,3 +1,5 @@
+import { RoleGuard, Rule } from 'src/app/guards/role.guard';
+import { RoleModel } from '../users/models/role.model';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { MovieDetailsResolver } from './resolvers/movie-details.resolver';
@@ -17,6 +19,11 @@ export const moviesRoutes = [
     resolve: {
       movie: MovieDetailsResolver,
     },
+    data: {
+      rule: Rule.AnyRole,
+      roles: [RoleModel.Contributor],
+    },
+    canActivate: [RoleGuard],
   },
   {
     path: '**',

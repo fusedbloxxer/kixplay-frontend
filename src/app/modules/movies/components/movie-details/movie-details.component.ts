@@ -20,7 +20,6 @@ import { MovieDetailsModel } from '../../models/movie-details.model';
 export class MovieDetailsComponent implements OnInit {
   public canSeeSources$: Observable<boolean>;
 
-  @Input('movie')
   public movie: MovieDetailsModel;
 
   constructor(

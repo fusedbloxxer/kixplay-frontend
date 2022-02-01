@@ -46,6 +46,11 @@ export class AuthorizationService {
       return [];
     }
 
+    // In case the user has no roles
+    if (!this.authService.currentUserValue.claims.role) {
+      return [];
+    }
+
     // In case the user has a single role
     if (typeof(this.authService.currentUserValue.claims.role) === "string") {
       return [this.authService.currentUserValue.claims.role];
